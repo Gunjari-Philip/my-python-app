@@ -1,25 +1,20 @@
-# Use Ubuntu as the base image
+# Use Ubuntu base image
 FROM ubuntu:22.04
 
-# Prevent interactive prompts during package installation
+# Avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Update and install Python, pip
+# Install Python
 RUN apt-get update && \
     apt-get install -y python3 python3-pip && \
     apt-get clean
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy your Python files to the container
+# Copy script into container
 COPY . .
 
-# Install Python dependencies
-RUN pip3 install --no-cache-dir -r requirements.txt
-
-# Expose the port your app runs on
-EXPOSE 5000
-
-# Run the Python application
+# Run the script
 CMD ["python3", "app.py"]
+
